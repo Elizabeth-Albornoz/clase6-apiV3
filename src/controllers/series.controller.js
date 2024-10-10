@@ -1,15 +1,19 @@
 const series = require('../../data/series.json') //el controlador accede a los datos
+const {Series} = require('../models/')
 const controller = {}
 controller.series = series 
 
-const getAllSeries = (req,res) => {
-    res.status(200).json(series)
+const getAllSeries = async(req,res) => {
+    //await porque se tiene que quedar esperando el resultado
+    //para usar await tiene que estar dentro de un contexto asincronico async()
+    const data = await Series.findAll({}) //recibe un objeto vacio cuando quiere recuperar todos
+    res.status(200).json(data)
 }
 controller.getAllSeries = getAllSeries
 
-const getSerieById = (req,res) => {
+const getSerieById = async(req,res) => {
     const id = req.params.id
-    const serie = series.find(serie =>serie.id == id)
+    const serie = await Series.findByPk(id)
     res.status(200).json(serie)
 }
 controller.getSerieById = getSerieById
