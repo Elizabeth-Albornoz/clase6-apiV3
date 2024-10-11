@@ -20,7 +20,8 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'Series', //por defecto si el modelo esta en singular
-    tableName: 'Series' //la tabla en plural
+    tableName: 'Series', //la tabla en plural
+    //timestamps: false //para quitar los atributos //los habilitamos cuando hacemos insert o update
   });
   return Series;
 };
